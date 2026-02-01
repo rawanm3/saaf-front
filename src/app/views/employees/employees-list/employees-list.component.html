@@ -78,7 +78,15 @@
                 </span>
               </td>
               <td class="text-center">
-                <div class="btn-group btn-group-sm" role="group">
+                <div class="btn-group btn-group-sm" role="group" dir="ltr">
+                  <button
+                    class="btn btn-outline-danger"
+                    (click)="deleteEmployee(employee._id!)"
+                    [attr.aria-label]="'EMPLOYEE.DELETE_EMPLOYEE' | translate"
+                    [title]="'EMPLOYEE.DELETE_EMPLOYEE' | translate">
+                    <i class="fas fa-trash"></i>
+                    <span class="ms-1 d-none d-sm-inline">{{ 'COMMON.DELETE' | translate }}</span>
+                  </button>
                   <button
                     class="btn btn-outline-primary"
                     (click)="editEmployee(employee)"
@@ -88,15 +96,6 @@
                     <span class="ms-1 d-none d-sm-inline">{{ 'COMMON.EDIT' | translate }}</span>
                   </button>
 
-
-                  <button
-                    class="btn btn-outline-danger"
-                    (click)="deleteEmployee(employee._id!)"
-                    [attr.aria-label]="'EMPLOYEE.DELETE_EMPLOYEE' | translate"
-                    [title]="'EMPLOYEE.DELETE_EMPLOYEE' | translate">
-                    <i class="fas fa-trash"></i>
-                    <span class="ms-1 d-none d-sm-inline">{{ 'COMMON.DELETE' | translate }}</span>
-                  </button>
                 </div>
               </td>
             </tr>
@@ -130,8 +129,8 @@
           <i class="fas fa-edit me-2"></i>
           {{ 'EMPLOYEE.EDIT_EMPLOYEE' | translate }}
         </h5>
-        <button type="button" class="btn-close" (click)="closeEditModal()"
-                [attr.aria-label]="'COMMON.CLOSE' | translate"></button>
+        <!-- <button type="button" class="btn-close" (click)="closeEditModal()"
+                [attr.aria-label]="'COMMON.CLOSE' | translate"></button> -->
       </div>
 
       <form [formGroup]="editForm" (ngSubmit)="updateEmployee()">

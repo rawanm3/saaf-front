@@ -24,8 +24,8 @@ import {
   providedIn: 'root',
 })
 export class PropertyService {
-  private baseUrl = 'http://localhost:9000/api/realestate'
-  private cyclesUrl = 'http://localhost:9000/api/propertycycle'
+  private baseUrl = 'http://saaf.net.sa/api/realestate'
+  private cyclesUrl = 'http://saaf.net.sa/api/propertycycle'
 
   private propertiesSource = new BehaviorSubject<Property[]>([])
   private propertySource = new BehaviorSubject<Property | null>(null)
@@ -43,7 +43,7 @@ export class PropertyService {
   private get headers() {
     return { Authorization: this.authService.session || '' }
   }
-  
+
   getPendingDistributions() {
     return this.http.get(`${this.cyclesUrl}/pending-distributions`);
   }

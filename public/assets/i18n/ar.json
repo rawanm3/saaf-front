@@ -801,6 +801,9 @@
     "STATUS": "الحالة",
     "DATE": "التاريخ",
     "ALERTS": {
+    "CONFIRM_YES": "نعم، احذف",
+    "CONFIRM_DELETE_YES": "نعم، احذف",
+    "CONFIRM_DELETE_NO": "إلغاء",
       "WARNING_TITLE": "تحذير",
       "FILL_REQUIRED_FIELDS": "يرجى ملء جميع الحقول المطلوبة بشكل صحيح",
       "SUCCESS_TITLE": "تم بنجاح",
