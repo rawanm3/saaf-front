@@ -7,39 +7,76 @@ import { AnalyticsComponent } from './dashboards/analytics/analytics.component'
 import { WalletListComponent } from './Wallet/wallet-list/wallet-list.component'
 import { CyclesDetailsComponent } from './property/details/cycles-details/cycles-details.component'
 
-import { adminGuard } from '../gaurds/auth.guard'
+import { roleGuard } from '../gaurds/auth.guard'
 
 
 export const VIEWS_ROUTES: Route[] = [
   {
     path: 'dashboards',
     component: AnalyticsComponent,
-    canActivate: [adminGuard],
+    canActivate: [roleGuard],
     data: { title: 'Dashboard' },
   },
+//   {
+//   path: 'dashboards',
+//   canActivate: [roleGuard],
+//   data: { roles: ['admin', 'accountant', 'employee'] },
+//   redirectTo: 'dashboards/employee',
+//   pathMatch: 'full',
+// },
+
   {
-    path: 'property',
-    canActivate: [adminGuard], 
-    loadChildren: () =>
-      import('./property/property.route').then((mod) => mod.PROPERTY_ROUTES),
-  },
+  path: 'dashboards/admin',
+  component: AnalyticsComponent,
+  canActivate: [roleGuard],
+  data: { roles: ['admin'], title: 'Admin Dashboard' },
+},
+{
+  path: 'dashboards/accountant',
+  component: AnalyticsComponent,
+  canActivate: [roleGuard],
+  data: { roles: ['accountant'], title: 'Accountant Dashboard' },
+},
+{
+  path: 'dashboards/employee',
+  component: AnalyticsComponent,
+  canActivate: [roleGuard],
+  data: { roles: ['employee'], title: 'Employee Dashboard' },
+},
+
+{
+  path: 'property',
+  canActivate: [roleGuard],
+  data: { roles: ['admin', 'employee'] },
+  loadChildren: () =>
+    import('./property/property.route').then(mod => mod.PROPERTY_ROUTES),
+},
+
   { path: ':propertyId/cycles', component: CyclesDetailsComponent }
   ,
   {
     path: 'agents',
+      canActivate: [roleGuard],
+  data: { roles: ['admin', 'accountant'] },
     loadChildren: () =>
       import('./agents/agents.route').then((mod) => mod.AGENT_ROUTES),
   },
-  {
-    path: 'customers',
-    canActivate: [adminGuard], 
-    loadChildren: () =>
-      import('./customers/customers.route').then((mod) => mod.CUSTOMER_ROUTES),
-  },
+{
+  path: 'customers',
+  canActivate: [roleGuard],
+  canActivateChild: [roleGuard],
+  // data: { roles: ['admin'] },
+  data: { roles: ['admin', 'employee'] },
+  loadChildren: () =>
+    import('./customers/customers.route').then(mod => mod.CUSTOMER_ROUTES),
+},
+
 
   {
     path: 'investment',
-    canActivate: [adminGuard], 
+      canActivate: [roleGuard],
+  data: { roles: ['admin', 'accountant'] },
+    // canActivate: [adminGuard], 
     loadChildren: () =>
       import('./investments/investment.route').then(
         (mod) => mod.INVESTMENT_ROUTES
@@ -49,18 +86,24 @@ export const VIEWS_ROUTES: Route[] = [
   {
     path: 'transactions',
     component: TransactionsComponent,
-    canActivate: [adminGuard], 
-    data: { title: 'Transactions' },
+      canActivate: [roleGuard],
+  data: { roles: ['admin', 'accountant'] },
+    // canActivate: [adminGuard], 
+    // data: { title: 'Transactions' },
   },
   {
     path: 'wallet',
-    canActivate: [adminGuard], 
+    // canActivate: [adminGuard], 
+      canActivate: [roleGuard],
+  data: { roles: ['admin', 'accountant'] },
     loadChildren: () =>
       import('./Wallet/wallet.route').then((mod) => mod.Wallet_ROUTES),
   },
   {
     path: 'distributions',
-    canActivate: [adminGuard], 
+      canActivate: [roleGuard],
+  data: { roles: ['admin', 'accountant'] },
+    // canActivate: [adminGuard], 
     loadChildren: () =>
       import('./Distributions/Distributions.route').then((mod) => mod.Wallet_ROUTES),
   },

@@ -67,7 +67,7 @@ export class SigninEmployeeComponent implements OnDestroy {
 
   private initializeForm(): void {
     this.signinForm = this.fb.group({
-      email: ['employee@company.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     })
   }

@@ -4,7 +4,7 @@ import { SignupComponent } from './signup/signup.component'
 import { PasswordComponent } from './password/password.component'
 import { LockScreenComponent } from './lock-screen/lock-screen.component'
 import { SigninEmployeeComponent } from './signin-employee/signin-employee.component'
-import { noAuthGuard } from '../../gaurds/auth.guard'
+import { noAuthGuard } from '../../gaurds/no-auth.guard'
 
 export const AUTH_ROUTES: Route[] = [
   {
